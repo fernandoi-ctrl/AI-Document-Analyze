@@ -1,0 +1,68 @@
+// import { Injectable } from '@nestjs/common';
+// import { PassportStrategy } from '@nestjs/passport';
+// import { ExtractJwt, Strategy } from 'passport-jwt';
+// import * as jwksRsa from 'jwks-rsa';
+
+// @Injectable()
+// export class JwtStrategy extends PassportStrategy(Strategy) {
+//   constructor() {
+//     super({
+//       // Extrae el token del header Authorization: Bearer <token>
+//       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+//       // No uses tu JWT_SECRET, usa JWKS de Supabase
+//       secretOrKeyProvider: jwksRsa.passportJwtSecret({
+//         cache: true,
+//         rateLimit: true,
+//         jwksRequestsPerMinute: 5,
+//         jwksUri: 'https://tjkxahablborautfvotf.supabase.co/auth/v1/jwks',
+//       }),
+//       algorithms: ['RS256'], // Supabase usa RS256
+//     });
+//   }
+
+//   async validate(payload: any) {
+//     // Aquí puedes mapear el payload a tu usuario
+//     return {
+//       id: payload.sub,
+//       email: payload.email,
+//       role: payload.role,
+//     };
+//   }
+// }
+import { Injectable } from '@nestjs/common';
+import { PassportStrategy } from '@nestjs/passport';
+import { ExtractJwt, Strategy } from 'passport-jwt';
+import * as jwksRsa from 'jwks-rsa';
+
+@Injectable()
+export class JwtStrategy extends PassportStrategy(Strategy) {
+  constructor() {
+    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY as string;
+    if (!supabaseKey) {
+      throw new Error('SUPABASE_SERVICE_ROLE_KEY is not defined');
+    }
+    super({
+      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+      secretOrKeyProvider: jwksRsa.passportJwtSecret({
+        cache: true,
+        rateLimit: true,
+        jwksRequestsPerMinute: 5,
+        jwksUri: 'https://tjkxahablborautfvotf.supabase.co/auth/v1/jwks',
+        requestHeaders: {
+          apikey: supabaseKey, // 👈 necesario
+        },
+      }),
+      algorithms: ['RS256'], // Supabase firma con RS256
+    });
+  }
+
+  async validate(payload: any) {
+    return {
+      id: payload.sub,
+      email: payload.email,
+      role: payload.role,
+    };
+  }
+}
+
+
