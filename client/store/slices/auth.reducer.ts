@@ -34,19 +34,47 @@ function extractMessage(error: unknown, fallback: string): string {
   return fallback
 }
 
+// export const loginUser = createAsyncThunk<
+//   LoginResponse,
+//   AuthCredentials,
+//   { rejectValue: string }
+// >('auth/login', async (credentials, thunkAPI) => {
+//   try {
+//     const { data } = await loginRequest(credentials)
+//     writeSession({ user: data.user, session: data.session })
+//     return data
+//   } catch (err) {
+//     return thunkAPI.rejectWithValue(extractMessage(err, 'Login failed'))
+//   }
+// })
 export const loginUser = createAsyncThunk<
   LoginResponse,
   AuthCredentials,
   { rejectValue: string }
 >('auth/login', async (credentials, thunkAPI) => {
   try {
-    const { data } = await loginRequest(credentials)
-    writeSession({ user: data.user, session: data.session })
-    return data
+    const { user, session } = await loginRequest(credentials)
+
+    // Adaptar la respuesta del backend (LoginResponseDto) al formato LoginResponse
+    const adapted: LoginResponse = {
+      user: {
+        id: user.id!,
+        email: user.email!,
+      },
+      session: {
+        accessToken: session.accessToken!,
+        refreshToken: '', // si no lo tienes, pon vacío
+        expiresAt: Date.now() + 3600 * 1000, // ejemplo: 1 hora
+      },
+    }
+
+    writeSession(adapted)
+    return adapted
   } catch (err) {
     return thunkAPI.rejectWithValue(extractMessage(err, 'Login failed'))
   }
 })
+
 
 export const registerUser = createAsyncThunk<
   RegisterResponse,
@@ -54,8 +82,11 @@ export const registerUser = createAsyncThunk<
   { rejectValue: string }
 >('auth/register', async (credentials, thunkAPI) => {
   try {
-    const { data } = await registerRequest(credentials)
-    return data
+    const { user, requiresEmailConfirmation } = await registerRequest(credentials)
+    return {
+      user,
+      requiresEmailConfirmation
+    }
   } catch (err) {
     return thunkAPI.rejectWithValue(extractMessage(err, 'Register failed'))
   }

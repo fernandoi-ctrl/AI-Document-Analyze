@@ -122,7 +122,9 @@
     "noDescription": "No case description",
     "notFoundTitle": "Analysis not found",
     "notFoundDesc": "It does not exist or you don't have permission to view it.",
-    "backToList": "Back to my analyses"
+    "backToList": "Back to my analyses",
+    "scheduleConsultation": "Schedule a consultation",
+    "scheduleConsultationDesc": "Discuss this analysis with a lawyer and get personalized advice."
   },
   "Processing": {
     "starting": "Starting analysis...",
@@ -188,13 +190,13 @@
     "noCritical": "No critical issues were detected in the file."
   },
   "FileUploader": {
-    "tooLarge": "\"{name}\" exceeds the 10 MB limit.",
+    "tooLarge": "\"{name}\" exceeds the 20 MB limit.",
     "invalidType": "\"{name}\" is not an allowed file type.",
     "tooMany": "Maximum {max} files allowed.",
     "drop": "Drop the files here",
     "drag": "Drag your documents here",
     "or": "or click to select files",
-    "limit": "Max 10 MB per file · Up to {max} files",
+    "limit": "Max 20 MB per file · Up to {max} files",
     "selectedOne": "{count} file selected",
     "selectedMany": "{count} files selected",
     "removeFile": "Remove file"

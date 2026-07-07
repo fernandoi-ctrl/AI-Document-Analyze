@@ -1,0 +1,84 @@
+// LexScan — Prisma schema (consultation scheduling module).
+//
+// The runtime data layer in this repo is Supabase (see DatabaseService);
+// this schema documents the Postgres tables that the consultations module
+// depends on and can be used to generate migrations.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum ConsultationStatus {
+  PENDING
+  CONFIRMED
+  COMPLETED
+  CANCELLED
+}
+
+model User {
+  id            String         @id @db.Uuid
+  email         String         @unique
+  fullName      String?        @map("full_name")
+  createdAt     DateTime       @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  cases         Case[]
+  consultations Consultation[] @relation("UserConsultations")
+  lawyerProfile Lawyer?
+
+  @@map("users")
+}
+
+model Lawyer {
+  id                 String         @id @default(uuid()) @db.Uuid
+  userId             String         @unique @map("user_id") @db.Uuid
+  specialty          String?
+  workingHoursStart  Int            @default(9)  @map("working_hours_start")
+  workingHoursEnd    Int            @default(18) @map("working_hours_end")
+  timezone           String         @default("UTC")
+  createdAt          DateTime       @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  user               User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  consultations      Consultation[] @relation("LawyerConsultations")
+
+  @@map("lawyers")
+}
+
+model Case {
+  id            String         @id @default(uuid()) @db.Uuid
+  userId        String         @map("user_id") @db.Uuid
+  title         String?
+  createdAt     DateTime       @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  user          User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  consultations Consultation[]
+
+  @@map("cases")
+}
+
+model Consultation {
+  id              String             @id @default(uuid()) @db.Uuid
+  caseId          String             @map("case_id") @db.Uuid
+  lawyerId        String             @map("lawyer_id") @db.Uuid
+  userId          String             @map("user_id") @db.Uuid
+  scheduledAt     DateTime           @map("scheduled_at") @db.Timestamptz(6)
+  durationMinutes Int                @default(30) @map("duration_minutes")
+  notes           String?            @db.Text
+  meetingUrl      String?            @map("meeting_url")
+  status          ConsultationStatus @default(PENDING)
+  createdAt       DateTime           @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt       DateTime           @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  case            Case               @relation(fields: [caseId], references: [id], onDelete: Cascade)
+  lawyer          Lawyer             @relation("LawyerConsultations", fields: [lawyerId], references: [id], onDelete: Restrict)
+  user            User               @relation("UserConsultations", fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([lawyerId, scheduledAt])
+  @@index([userId, scheduledAt])
+  @@index([status])
+  @@map("consultations")
+}

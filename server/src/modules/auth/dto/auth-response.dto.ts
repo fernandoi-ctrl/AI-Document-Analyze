@@ -9,10 +9,29 @@ export interface AuthSession {
   expiresAt: number;
 }
 
+// export class LoginResponseDto {
+//   user!: AuthUser;
+//   session!: AuthSession;
+// }
+// export class LoginResponseDto {
+//   userId?: string;
+//   email?: string;
+//   accessToken?: string;
+// }
+
 export class LoginResponseDto {
-  user!: AuthUser;
-  session!: AuthSession;
+  user?: {
+    id: string;
+    email: string;
+  };
+
+  session?: {
+    accessToken: string;
+    refreshToken?: string;
+    expiresAt?: number;
+  };
 }
+
 
 export class RegisterResponseDto {
   user!: AuthUser;

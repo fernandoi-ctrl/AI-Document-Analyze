@@ -122,7 +122,9 @@
     "noDescription": "Sin descripción del caso",
     "notFoundTitle": "Análisis no encontrado",
     "notFoundDesc": "No existe o no tienes permiso para verlo.",
-    "backToList": "Volver a mis análisis"
+    "backToList": "Volver a mis análisis",
+    "scheduleConsultation": "Agendar una consulta",
+    "scheduleConsultationDesc": "Comenta este análisis con un abogado y recibe asesoría personalizada."
   },
   "Processing": {
     "starting": "Iniciando análisis...",
@@ -188,13 +190,13 @@
     "noCritical": "No se detectaron problemas críticos en el expediente."
   },
   "FileUploader": {
-    "tooLarge": "\"{name}\" supera el límite de 10 MB.",
+    "tooLarge": "\"{name}\" supera el límite de 20 MB.",
     "invalidType": "\"{name}\" no es un tipo de archivo permitido.",
     "tooMany": "Máximo {max} archivos permitidos.",
     "drop": "Suelta los archivos aquí",
     "drag": "Arrastra tus documentos aquí",
     "or": "o haz clic para seleccionar archivos",
-    "limit": "Máximo 10 MB por archivo · Hasta {max} archivos",
+    "limit": "Máximo 20 MB por archivo · Hasta {max} archivos",
     "selectedOne": "{count} archivo seleccionado",
     "selectedMany": "{count} archivos seleccionados",
     "removeFile": "Eliminar archivo"

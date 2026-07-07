@@ -7,6 +7,7 @@ import { CASE_TYPE_LABELS, type CaseType } from '@/types/analysis'
 import { startAnalysis } from '@/services/analysesApi'
 import { createCheckout, startCheckout } from '@/services/paymentsApi'
 import FileUploader from './FileUploader'
+// import { ApiError } from 'next/dist/server/api-utils'
 
 interface CaseFormProps {
   onSubmit: (jobId: string) => void
@@ -34,7 +35,7 @@ export default function CaseForm({ onSubmit, onError }: CaseFormProps) {
       const { jobId } = await startAnalysis(caseType, description, files)
       onSubmit(jobId)
     } catch (err) {
-      if (err instanceof ApiError && err.status === 402) {
+      if (err instanceof ApiError && err.statusCode === 402) {
         try {
           const { url } = await createCheckout()
           window.location.href = url

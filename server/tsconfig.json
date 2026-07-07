@@ -6,6 +6,7 @@
     "outDir": "./dist",
     "baseUrl": "./",
     "rootDir": "./src",
+    "types": ["jest", "node"],
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "declaration": false,

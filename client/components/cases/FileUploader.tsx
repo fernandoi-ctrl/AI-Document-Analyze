@@ -9,7 +9,7 @@ interface FileUploaderProps {
   onChange: (files: File[]) => void
 }
 
-const MAX_SIZE = 10 * 1024 * 1024 // 10 MB
+const MAX_SIZE = 20 * 1024 * 1024 // 20 MB
 const MAX_FILES = 10
 
 export default function FileUploader({ files, onChange }: FileUploaderProps) {

@@ -26,7 +26,7 @@ function extractMessage(error: unknown, fallback: string): string {
 
 export const getCredits = createAsyncThunk<number, void, { rejectValue: string }>('payments/fetch_credits', async (_, thunkAPI) => {
   try {
-    const { data } = await fetchCredits()
+    const data = await fetchCredits()
     return data.credits
   } catch (err) {
     return thunkAPI.rejectWithValue(extractMessage(err, 'Failed to load credits'))
@@ -39,7 +39,7 @@ export const createCheckout = createAsyncThunk<
   { rejectValue: string }
 >('payments/create_checkout', async (_, thunkAPI) => {
   try {
-    const { data } = await startCheckout()
+    const data = await startCheckout()
     // No list to refresh — the user is redirected to Stripe externally.
     return data.url
   } catch (err) {

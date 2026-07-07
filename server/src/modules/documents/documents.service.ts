@@ -18,7 +18,7 @@ export class DocumentsService {
     }
     for (const f of files) {
       if (f.size > MAX_FILE_SIZE_BYTES) {
-        throw new BadRequestException(`El archivo "${f.originalname}" supera el límite de 10 MB.`);
+        throw new BadRequestException(`El archivo "${f.originalname}" supera el límite de 20 MB.`);
       }
       if (!isAllowedMime(f.mimetype)) {
         throw new BadRequestException(

@@ -1,5 +1,6 @@
 import {
   BadRequestException,
+  Body,
   Controller,
   Get,
   Headers,
@@ -18,7 +19,7 @@ import { CheckoutResponseDto } from './dto/checkout-response.dto';
 
 @Controller('payments')
 export class PaymentsController {
-  constructor(private readonly payments: PaymentsService) {}
+  constructor(private readonly payments: PaymentsService) { }
 
   @Post('checkout')
   @UseGuards(JwtAuthGuard)

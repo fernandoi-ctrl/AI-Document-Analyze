@@ -96,3 +96,11 @@ logs/
 # OS files
 .DS_Store
 Thumbs.db
+# TypeScript build info
+tsconfig.tsbuildinfo
+# Bun
+bun.lock
+# Env files
+.env
+.env.local
+.env.*.local

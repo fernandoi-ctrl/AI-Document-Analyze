@@ -12,7 +12,7 @@ dotenv.config({ path: __dirname + '/../.env' });
 // console.log('SUPABASE_URL:', process.env.SUPABASE_URL);
 // console.log('SUPABASE_SERVICE_ROLE_KEY:', process.env.SUPABASE_SERVICE_ROLE_KEY);
 async function bootstrap(): Promise<void> {
-
+  console.log(process.env.JWT_SECRET)
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
     rawBody: false,
   });

@@ -28,7 +28,7 @@ export const getEntities = createAsyncThunk<
   { rejectValue: string }
 >('analyses/fetch_entity_list', async (_: any, thunkAPI: { rejectWithValue: (arg0: string) => any; }) => {
   try {
-    const { data } = await fetchAnalyses()
+    const data = await fetchAnalyses()
     return data
   } catch (err) {
     return thunkAPI.rejectWithValue(extractMessage(err, 'Failed to load analyses'))

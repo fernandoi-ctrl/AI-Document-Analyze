@@ -8,10 +8,12 @@ import { CasesModule } from './modules/cases/cases.module';
 import { DocumentsModule } from './modules/documents/documents.module';
 import { AnalysesModule } from './modules/analyses/analyses.module';
 import { PaymentsModule } from './modules/payments/payments.module';
+import { ConsultationsModule } from './modules/consultations/consultations.module';
+import { LawyersModule } from './modules/lawyers/lawyers.module';
 import { DatabaseService } from './database/database.service';
 @Module({
   imports: [
-    ConfigModule.forRoot({ envFilePath: ['.env'], isGlobal: true }),
+    ConfigModule.forRoot({ envFilePath: ['./server/.env'], isGlobal: true }),
     DatabaseModule,
     AiModule,
     StorageModule,
@@ -20,6 +22,8 @@ import { DatabaseService } from './database/database.service';
     DocumentsModule,
     PaymentsModule,
     AnalysesModule,
+    ConsultationsModule,
+    LawyersModule,
   ],
   providers: [DatabaseService],
 })

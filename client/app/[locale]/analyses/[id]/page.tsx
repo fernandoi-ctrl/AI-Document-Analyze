@@ -141,6 +141,24 @@ export default function AnalysisDetailPage({ params }: { params: Promise<{ id: s
             onNewAnalysis={() => router.push('/analyze')}
           />
         </div>
+
+        {/* CTA: schedule a consultation with a lawyer */}
+        <div className="bg-blue-900 text-white rounded-3xl p-6 sm:p-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 print:hidden">
+          <div className="space-y-1">
+            <h3 className="text-lg font-black">{t('scheduleConsultation')}</h3>
+            <p className="text-sm text-white/70">{t('scheduleConsultationDesc')}</p>
+          </div>
+          <Link
+            href={`/consultations/schedule?caseId=${row.id}`}
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-amber-400 text-blue-900 font-bold rounded-2xl hover:bg-amber-300 transition-colors shrink-0"
+          >
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            {t('scheduleConsultation')}
+          </Link>
+        </div>
       </div>
     </main>
   )
