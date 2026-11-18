@@ -117,6 +117,7 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosRequestHeaders } from 'axios'
 import { getAccessToken, readSession, writeSession, clearSession } from '@/lib/sessionStorage'
 import { ApiError } from 'next/dist/server/api-utils'
+import { supabase } from '@/lib/supabase'
 
 export const API_URL =
   process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3001/api'
@@ -128,7 +129,10 @@ http.interceptors.request.use((config) => {
   const token = getAccessToken()
   if (token) {
     // Usa el método set en vez de asignar un objeto
-    config.headers?.set('Authorization', `Bearer ${token}`)
+    // config.headers?.set('Authorization', `Bearer ${token}`)
+    (config.headers as AxiosRequestHeaders).set('Authorization', `Bearer ${token}`)
+  } else {
+    config.headers = { Authorization: `Bearer ${token}` } as AxiosRequestHeaders
   }
   return config
 })
@@ -164,7 +168,6 @@ http.interceptors.response.use(
           },
         }
         writeSession(updated)
-
         // reintentar la petición original con el nuevo token
         originalRequest.headers = {
           ...originalRequest.headers,
@@ -186,6 +189,8 @@ export async function apiRequest<T>(
   path: string,
   options: RequestOptions = {},
 ): Promise<T> {
+
+  console.log(await readSession())
   const { method = 'GET', body, formData } = options
   const config: AxiosRequestConfig = { url: path, method }
 

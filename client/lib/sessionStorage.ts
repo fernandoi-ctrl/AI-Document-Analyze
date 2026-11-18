@@ -1,7 +1,7 @@
 import type { AuthSession, AuthUser } from '@/types/auth'
 
-const STORAGE_KEY = 'lexscan.session'
-const SESSION_EVENT = 'lexscan:session-change'
+const STORAGE_KEY = 'Analiza tu juicio.session'
+const SESSION_EVENT = 'Analiza tu juicio:session-change'
 
 export interface StoredSession {
   user: AuthUser

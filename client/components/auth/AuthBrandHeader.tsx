@@ -8,7 +8,7 @@ export default function AuthBrandHeader() {
         <div className="w-9 h-9 bg-amber-400 rounded-lg flex items-center justify-center">
           <span className="text-blue-900 font-black text-sm">LS</span>
         </div>
-        <span className="text-xl font-black tracking-tight">LexScan</span>
+        <span className="text-xl font-black tracking-tight">Analiza tu juicio</span>
       </Link>
       <LocaleSwitcher />
     </nav>

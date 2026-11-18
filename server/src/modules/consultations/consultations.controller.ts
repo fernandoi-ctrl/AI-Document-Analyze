@@ -25,7 +25,7 @@ import { AvailabilitySlotDto } from './dto/availability-slot.dto';
 @Controller('consultations')
 @UseGuards(JwtAuthGuard)
 export class ConsultationsController {
-  constructor(private readonly consultations: ConsultationsService) {}
+  constructor(private readonly consultations: ConsultationsService) { }
 
   @Get()
   list(@AuthUser() user: RequestUser): Promise<ConsultationResponseDto[]> {

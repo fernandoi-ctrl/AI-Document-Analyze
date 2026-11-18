@@ -6,34 +6,12 @@ import { AuthGuard } from '@nestjs/passport';
 
 @Injectable()
 export class JwtAuthGuard extends AuthGuard('jwt') {
-  // constructor(private readonly db: DatabaseService) {
-  //   super();
-  // }
-
-  // async canActivate(context: ExecutionContext): Promise<boolean> {
-  //   const req = context.switchToHttp().getRequest<Request & { user?: RequestUser }>();
-  //   const header = req.headers['authorization'];
-  //   const headerToken = typeof header === 'string' ? header.replace(/^Bearer\s+/i, '') : null;
-  //   const queryToken = typeof req.query['access_token'] === 'string' ? (req.query['access_token'] as string) : null;
-  //   const token = headerToken ?? queryToken;
-
-  //   // if (process.env.NODE_ENV === 'development') {
-  //   //   const request = context.switchToHttp().getRequest();
-  //   //   request.user = { id: '2ff541b4-a1bf-4d12-9ab9-733346a41cdb', email: 'dev@example.com' };
-  //   //   return true;
-  //   // }
-  //   if (!token) {
-  //     throw new UnauthorizedException('Missing bearer token');
-  //   }
-
-  //   const { data, error } = await this.db.client.auth.getUser(token);
-  //   //  const { data, error } = await this.db.client.auth.getUser(token);
-  //   console.log('Supabase getUser result:', { data, error });
-  //   if (error || !data.user) {
-  //     throw new UnauthorizedException('Invalid token');
-  //   }
-
-  //   req.user = { id: data.user.id, email: data.user.email ?? '' };
-  //   return true;
-  // }
+  getRequest(context: ExecutionContext) {
+    const req = context.switchToHttp().getRequest()
+    // Si no hay header, intenta leer el token de query
+    if (!req.headers.authorization && req.query.access_token) {
+      req.headers.authorization = `Bearer ${req.query.access_token}`
+    }
+    return req
+  }
 }

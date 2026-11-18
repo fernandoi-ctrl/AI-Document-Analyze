@@ -1,0 +1,26 @@
+.error-screen {
+  background: #0a1a3a;
+  color: #fff;
+  text-align: center;
+  padding: 60px;
+}
+
+.error-screen h1 {
+  font-size: 28px;
+  color: #facc15;
+  margin-bottom: 20px;
+}
+
+.error-screen p {
+  font-size: 16px;
+  margin-bottom: 30px;
+}
+
+.error-screen button {
+  background: #facc15;
+  color: #0a1a3a;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+}

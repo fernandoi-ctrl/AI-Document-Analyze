@@ -7,7 +7,7 @@ import { useLocale, useTranslations } from 'next-intl'
 import { getAnalysis } from '@/services/analysesApi'
 import { useAuth } from '@/components/AuthProvider'
 import type { AnalysisResult } from '@/types/analysis'
-import AnalysisResultView from '@/components/analyses/AnalysisResult'
+import AnalysisResultView from '@/analyses/AnalysisResult'
 
 interface AnalysisRow {
   id: string

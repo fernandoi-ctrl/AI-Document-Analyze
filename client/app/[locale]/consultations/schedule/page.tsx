@@ -159,7 +159,7 @@ export default function LawyerSchedulePage() {
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-amber-400">
               <span className="text-xs font-black text-blue-900">LS</span>
             </div>
-            <span className="text-lg font-black tracking-tight">LexScan</span>
+            <span className="text-lg font-black tracking-tight">Analiza tu juicio</span>
           </Link>
           <span className="text-sm text-white/70">Agendar consulta</span>
         </div>
@@ -208,16 +208,25 @@ export default function LawyerSchedulePage() {
         </Section>
 
         <Section title="3. Escoge un horario" step={3} disabled={!selectedDate}>
-          <TimeSlotPicker
-            date={selectedDate}
-            slots={slots}
-            loading={loadingAvailability}
-            error={availabilityError}
-            selectedStart={selectedSlot?.start ?? null}
-            onSelect={handleSlotSelect}
-            onRetry={refresh}
-          />
+          {selectedLawyer ? (
+            <TimeSlotPicker
+              date={selectedDate}
+              slots={slots}
+              loading={loadingAvailability}
+              error={availabilityError}
+              selectedStart={selectedSlot?.start ?? null}
+              onSelect={handleSlotSelect}
+              onRetry={refresh}
+              lawyer={selectedLawyer}
+            />
+          ) : (
+            <EmptyState
+              title="Selecciona primero un abogado"
+              description="Elige un abogado para ver sus horarios disponibles."
+            />
+          )}
         </Section>
+
 
         <Section
           title="4. Confirma los detalles"

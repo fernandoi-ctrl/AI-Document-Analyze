@@ -1,8 +1,8 @@
-# LexScan Frontend — Claude Instructions
+# Analiza tu juicio Frontend — Claude Instructions
 
 ## Application Overview
 
-This folder contains the frontend application for LexScan.
+This folder contains the frontend application for Analiza tu juicio.
 
 Framework:
 
@@ -42,7 +42,7 @@ The frontend MUST NOT:
 
 * implement business logic
 * access database directly
-* call AI providers directly
+* call System providers directly
 * process OCR
 * calculate legal analysis
 

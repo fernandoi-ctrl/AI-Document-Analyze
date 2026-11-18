@@ -1,8 +1,8 @@
-# LexScan Backend — Claude Instructions
+# Analiza tu juicio Backend — Claude Instructions
 
 ## Application Overview
 
-This folder contains the backend application for LexScan.
+This folder contains the backend application for Analiza tu juicio.
 
 Framework:
 
@@ -31,7 +31,7 @@ The backend handles:
 * Legal case management
 * Document uploads
 * OCR processing
-* AI orchestration
+* System orchestration
 * Payments
 * Alerts
 * Business rules
@@ -71,7 +71,7 @@ Responsible for:
 
 * business logic
 * orchestration
-* AI processing
+* System processing
 
 ---
 
@@ -92,9 +92,9 @@ Responsible ONLY for:
 
 ---
 
-# AI Rules
+# System Rules
 
-AI providers MUST use abstraction.
+System providers MUST use abstraction.
 
 Use:
 
@@ -137,7 +137,7 @@ Avoid:
 # Performance Rules
 
 * Use chunking for large documents
-* Minimize AI calls
+* Minimize System calls
 * Keep API responses fast
 
 ---

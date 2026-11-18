@@ -9,11 +9,12 @@ import {
   ImageDocument,
   PdfDocument,
 } from '../ai-provider.interface';
+import { Jurisdiction } from '../../geo/jurisdiction.types';
 import {
   OCR_IMAGE_PROMPT,
   OCR_PDF_PROMPT,
-  buildAnalysisSystemPrompt,
   buildChunkSummaryPrompt,
+  buildAnalysisSystemPrompt,
 } from '../prompts/legal-analysis.prompt';
 import { fromBuffer } from 'pdf2pic';
 
@@ -38,11 +39,12 @@ export class ClaudeAIProvider implements AIProvider, OnModuleInit {
     description: string,
     documentText: string,
     caseType: CaseType,
+    jurisdiction: Jurisdiction,
   ): Promise<AnalysisResult> {
     const response = await this.client.messages.create({
       model: ANALYSIS_MODEL,
       max_tokens: 4096,
-      system: buildAnalysisSystemPrompt(caseType),
+      system: buildAnalysisSystemPrompt(caseType, jurisdiction),
       messages: [
         {
           role: 'user',
@@ -110,7 +112,7 @@ function extractJson(text: string): unknown {
   const start = text.indexOf('{');
   const end = text.lastIndexOf('}');
   if (start === -1 || end === -1) {
-    throw new Error('AI response did not contain JSON');
+    throw new Error('System response did not contain JSON');
   }
   return JSON.parse(text.slice(start, end + 1));
 }

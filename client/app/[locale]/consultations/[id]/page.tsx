@@ -57,7 +57,7 @@ export default function ConsultationDetailPage() {
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-amber-400">
               <span className="text-xs font-black text-blue-900">LS</span>
             </div>
-            <span className="text-lg font-black tracking-tight">LexScan</span>
+            <span className="text-lg font-black tracking-tight">Analiza tu juicio</span>
           </Link>
           <span className="text-sm text-white/70">Detalle de la consulta</span>
         </div>

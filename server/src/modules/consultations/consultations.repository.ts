@@ -13,15 +13,14 @@ import {
 import { BLOCKING_STATUSES, ConsultationStatus } from './enums/consultation-status.enum';
 
 export interface LawyerRow {
-  id: string
-  user_id: string
-  specialty?: string | null
-  timezone: string
-  working_hours_start: number
-  working_hours_end: number
-  user: { full_name: string | null; email: string } | null
+  id: string;
+  user_id: string;
+  specialty?: string | null;
+  timezone: string;
+  working_hours_start: number;
+  working_hours_end: number;
+  user: { full_name: string | null; email: string } | null;
 }
-
 
 export interface OverlapQuery {
   lawyerId: string;
@@ -32,7 +31,7 @@ export interface OverlapQuery {
 
 const TABLE = 'consultations';
 const LAWYERS_TABLE = 'lawyers';
-const USERS_TABLE = 'users';
+const USERS_TABLE = 'auth.users'; // 👈 corregido
 
 const SELECT_COLUMNS =
   'id, case_id, lawyer_id, user_id, scheduled_at, duration_minutes, notes, meeting_url, status, created_at, updated_at';
@@ -114,18 +113,31 @@ export class ConsultationsRepository {
     }
   }
 
-  async userExists(userId: string): Promise<boolean> {
-    const { data, error } = await this.db.client
-      .from(USERS_TABLE)
-      .select('id')
-      .eq('id', userId)
-      .maybeSingle();
+  // async userExists(userId: string): Promise<boolean> {
+  //   const { data, error } = await this.db.client
+  //     .from("auth.users") // 👈 nombre completo del esquema + tabla
+  //     .select('id')
+  //     .eq('id', userId)
+  //     .maybeSingle();
 
-    if (error) {
-      this.logger.error(`userExists failed: ${error.message}`);
+  //   if (error) {
+  //     this.logger.error(`userExists failed: ${error.message}`);
+  //     throw new InternalServerErrorException('No se pudo validar el usuario.');
+  //   }
+  //   return Boolean(data);
+  // }
+  async userExists(userId: string): Promise<boolean> {
+    try {
+      const { data, error } = await this.db.client.auth.admin.getUserById(userId);
+      if (error) {
+        this.logger.error(`userExists failed: ${error.message}`);
+        throw new InternalServerErrorException('No se pudo validar el usuario.');
+      }
+      return Boolean(data?.user);
+    } catch (err: any) {
+      this.logger.error(`userExists failed: ${err.message}`);
       throw new InternalServerErrorException('No se pudo validar el usuario.');
     }
-    return Boolean(data);
   }
 
   async findLawyerById(lawyerId: string): Promise<LawyerRow | null> {
@@ -147,9 +159,6 @@ export class ConsultationsRepository {
       query.scheduledAt.getTime() + query.durationMinutes * 60_000,
     );
 
-    // Pre-filter on the DB side by a generous window, then check exact overlap in memory.
-    // We pull any consultations for the lawyer whose start is before our end and whose
-    // duration could plausibly extend into our window.
     let builder = this.db.client
       .from(TABLE)
       .select(SELECT_COLUMNS)

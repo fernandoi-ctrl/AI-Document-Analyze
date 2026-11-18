@@ -53,6 +53,8 @@ export default function FileUploader({ files, onChange }: FileUploaderProps) {
       'application/pdf': ['.pdf'],
       'image/jpeg': ['.jpg', '.jpeg'],
       'image/png': ['.png'],
+      'text/plain': ['.txt'],
+      'text/markdown': ['.md'],
     },
     maxSize: MAX_SIZE,
     maxFiles: MAX_FILES,
@@ -98,7 +100,7 @@ export default function FileUploader({ files, onChange }: FileUploaderProps) {
           )}
 
           <div className="flex gap-2 mt-1">
-            {['PDF', 'JPG', 'PNG'].map((type) => (
+            {['PDF', 'JPG', 'PNG', "TXT", "MD"].map((type) => (
               <span key={type} className="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-sm font-medium">
                 {type}
               </span>

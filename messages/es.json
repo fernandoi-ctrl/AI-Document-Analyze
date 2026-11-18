@@ -1,11 +1,11 @@
 {
   "Metadata": {
-    "title": "LexScan — Analiza tu juicio con IA",
+    "title": "Analiza tu juicio — Analiza tu juicio con IA",
     "description": "Sube tu expediente legal y recibe un análisis completo con inteligencia artificial. Fortalezas, riesgos y recomendaciones para tu caso.",
     "keywords": "análisis legal,expediente,abogado,juicio,inteligencia artificial,México"
   },
   "Common": {
-    "appName": "LexScan",
+    "appName": "Analiza tu juicio",
     "loading": "Cargando...",
     "loadingAnalysis": "Cargando análisis...",
     "back": "Volver",
@@ -37,16 +37,16 @@
     "registerSuccess": "Revisa tu correo para confirmar tu cuenta. Esto puede llevar tiempo."
   },
   "Home": {
-    "badge": "Análisis legal con inteligencia artificial",
-    "headline": "Analiza tu juicio con",
-    "headlineHighlight": "inteligencia artificial",
+    "badge": "Análisis legal con Nuestro sistema",
+    "headline": "Analiza tu juicio ",
+    "headlineHighlight": "En linea",
     "subhead": "Sube tu expediente o describe tu caso. En minutos recibirás un análisis legal completo: fortalezas, riesgos y recomendaciones.",
     "ctaAnalyze": "Analizar mi caso",
     "creditsHint": "Solo descripción: gratis · Con PDF: 1 crédito · Resultado en minutos",
     "howItWorks": "¿Cómo funciona?",
     "step1Title": "Describe tu caso",
     "step1Desc": "Escribe qué pasó o sube tus documentos legales (PDFs, fotos).",
-    "step2Title": "La IA analiza todo",
+    "step2Title": "Nuestro sistema analiza todo",
     "step2Desc": "Nuestro sistema revisa el expediente y evalúa tu situación legal.",
     "step3Title": "Recibe tu análisis",
     "step3Desc": "Obtén un reporte claro con fortalezas, riesgos y recomendaciones.",
@@ -56,7 +56,7 @@
     "ctaCardDesc": "Obtén un análisis objetivo en menos de 3 minutos, sin necesidad de conocimientos legales.",
     "ctaCardButton": "Comenzar análisis",
     "ctaCardFinePrint": "Análisis con tu descripción: <b>gratis</b>. Subir PDFs: <b>1 crédito por análisis</b>.",
-    "footer": "LexScan — Análisis legal asistido por IA. Este servicio no sustituye la asesoría de un abogado."
+    "footer": "Analiza tu juicio — Análisis legal asistido por IA. Este servicio no sustituye la asesoría de un abogado."
   },
   "Analyze": {
     "breadcrumb": "Análisis de caso",
@@ -127,7 +127,7 @@
   "Processing": {
     "starting": "Iniciando análisis...",
     "title": "Estamos analizando tu expediente",
-    "subtitle": "La inteligencia artificial está revisando tu caso con detalle. Esto puede tardar entre 1 y 3 minutos.",
+    "subtitle": "Nuestro sistema está revisando tu caso con detalle. Esto puede tardar entre 1 y 3 minutos.",
     "percent": "{p}% completado",
     "wait": "Por favor espera...",
     "doNotClose": "No cierres esta ventana mientras se procesa tu caso.",

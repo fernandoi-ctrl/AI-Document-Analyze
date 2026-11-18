@@ -1,6 +1,7 @@
 import { supabase } from '@/lib/supabase'
 import { API_URL, apiFetch, apiRequest } from './apiClient'
 import type { AnalysisResult, AnalysisSummary, CaseType } from '@/types/analysis'
+import { readSession } from '@/lib/sessionStorage'
 
 export function fetchAnalyses() {
   return apiRequest<AnalysisSummary[]>('/analyses')
@@ -30,8 +31,9 @@ export function getAnalysis(id: string): Promise<AnalysisDetail> {
 }
 
 export async function streamJobEvents(jobId: string): Promise<EventSource> {
-  const { data } = await supabase.auth.getSession()
-  const token = data.session?.access_token ?? ''
+  // const { data } = await supabase.auth.getSession()
+  const session = readSession()
+  const token = session?.session.accessToken ?? ''
   const url = `${API_URL}/analyses/jobs/${jobId}/events?access_token=${encodeURIComponent(token)}`
   return new EventSource(url)
 }

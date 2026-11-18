@@ -26,6 +26,6 @@
     "**/*.mts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "app/[locale]/not-found.js"  ],
   "exclude": ["node_modules"]
 }

@@ -1,8 +1,8 @@
-# LexScan — Global Claude Instructions
+# Analiza tu juicio — Global Claude Instructions
 
 ## Project Overview
 
-LexScan is an AI-powered legal analysis platform.
+Analiza tu juicio is an Legal Document Analysis platform.
 
 The repository uses a monorepo-style architecture with two applications:
 
@@ -21,7 +21,7 @@ Contains:
 
 * NestJS backend
 * business logic
-* AI integrations
+* System integrations
 * OCR processing
 * database access
 * authentication
@@ -44,7 +44,7 @@ Contains:
 
 * NEVER place business logic inside `/client`
 * NEVER access database directly from frontend
-* NEVER call AI providers from frontend
+* NEVER call System providers from frontend
 * ALWAYS keep backend/frontend separation
 
 ---
@@ -104,7 +104,7 @@ Never tightly couple implementation logic.
 
 ---
 
-# AI Guidelines
+# System Guidelines
 
 AI-generated legal analysis MUST:
 

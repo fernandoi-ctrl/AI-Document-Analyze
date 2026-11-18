@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Get,
+  Inject,
   NotFoundException,
   Param,
   Post,
@@ -20,6 +21,8 @@ import { RequestUser } from '../../common/auth/auth-user.types';
 import { MAX_FILES } from '../documents/dto/upload-rules';
 import { UploadedFile } from '../documents/types';
 import { CaseInputDto } from '../cases/dto/case-input.dto';
+import { GEO_LOCATION } from '../../geo/geo.tokens';
+import { GeoLocationService } from '../../geo/geo-location.interface';
 import { AnalysesService } from './analyses.service';
 import { AnalysisDetailDto, AnalysisSummaryDto } from './dto/analysis-response.dto';
 import { Job, JobStoreService } from './job-store.service';
@@ -30,23 +33,58 @@ export class AnalysesController {
   constructor(
     private readonly analyses: AnalysesService,
     private readonly jobs: JobStoreService,
+    @Inject(GEO_LOCATION) private readonly geo: GeoLocationService,
   ) { }
 
+  // @Post()
+  // @UseInterceptors(FilesInterceptor('files', MAX_FILES))
+  // start(
+  //   @AuthUser() user: RequestUser,
+  //   @Body() caseInput: CaseInputDto,
+  //   @Req() req: Request,
+  //   @UploadedFiles() files: Express.Multer.File[] = [],
+  // ): Promise<{ jobId: string }> {
+  //   const mapped: UploadedFile[] = files.map((f) => ({
+  //     originalname: f.originalname,
+  //     mimetype: f.mimetype,
+  //     size: f.size,
+  //     buffer: f.buffer,
+  //   }));
+  //   const jurisdiction = this.geo.resolveFromRequest(req);
+  //   return this.analyses.start({ userId: user.id, caseInput, files: mapped, jurisdiction });
+  // }
   @Post()
   @UseInterceptors(FilesInterceptor('files', MAX_FILES))
   start(
     @AuthUser() user: RequestUser,
     @Body() caseInput: CaseInputDto,
+    @Req() req: Request,
     @UploadedFiles() files: Express.Multer.File[] = [],
   ): Promise<{ jobId: string }> {
-    const mapped: UploadedFile[] = files.map((f) => ({
-      originalname: f.originalname,
-      mimetype: f.mimetype,
-      size: f.size,
-      buffer: f.buffer,
-    }));
-    return this.analyses.start({ userId: user.id, caseInput, files: mapped });
+    const allowedTypes = [
+      'application/pdf',
+      'image/jpeg',
+      'image/png',
+      'text/plain',
+      'text/markdown',
+    ];
+
+    const mapped: UploadedFile[] = files.map((f) => {
+      if (!allowedTypes.includes(f.mimetype)) {
+        throw new Error(`Tipo de archivo no permitido: ${f.mimetype}`);
+      }
+      return {
+        originalname: f.originalname,
+        mimetype: f.mimetype,
+        size: f.size,
+        buffer: f.buffer,
+      };
+    });
+
+    const jurisdiction = this.geo.resolveFromRequest(req);
+    return this.analyses.start({ userId: user.id, caseInput, files: mapped, jurisdiction });
   }
+
 
   @Get()
   async list(@AuthUser() user: RequestUser): Promise<AnalysisSummaryDto[]> {

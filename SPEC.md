@@ -1,10 +1,10 @@
-# LexScan — Technical Specification (SPEC.md)
+# Analiza tu juicio — Technical Specification (SPEC.md)
 
 # 1. Project Overview
 
-LexScan is an AI-powered legal analysis platform that allows users to upload legal documents and receive automated legal insights.
+Analiza tu juicio is an Legal Document Analysis platform that allows users to upload legal documents and receive automated legal insights.
 
-The platform analyzes legal cases using AI and provides:
+The platform analyzes legal cases using System and provides:
 
 * Case summary
 * Viability score
@@ -13,7 +13,7 @@ The platform analyzes legal cases using AI and provides:
 * Procedural alerts
 * Recommended actions
 
-The system is designed for non-technical users and prioritizes simplicity and clarity.
+The System  is designed for non-technical users and prioritizes simplicity and clarity.
 
 ---
 
@@ -30,7 +30,7 @@ The project MUST use a two-application structure:
 
 # 3. /server Application
 
-The `/server` application contains the backend system.
+The `/server` application contains the backend System .
 
 ## Backend Stack
 
@@ -39,7 +39,7 @@ The `/server` application contains the backend system.
 * PostgreSQL
 * Prisma ORM
 * REST API
-* AI integrations
+* System integrations
 * OCR processing
 
 ---
@@ -53,12 +53,12 @@ The backend MUST handle:
 * Case management
 * Document uploads
 * OCR processing
-* AI analysis
+* System analysis
 * Payments
 * Alerts
 * Business rules
 * Storage abstraction
-* AI provider abstraction
+* System provider abstraction
 
 ---
 
@@ -155,7 +155,7 @@ The frontend MUST communicate ONLY with the backend API.
    ↓
 /server API
    ↓
-Database / AI / Storage
+Database / System / Storage
 ```
 
 ---
@@ -166,7 +166,7 @@ The frontend MUST NOT:
 
 * Access Supabase directly
 * Access database directly
-* Call AI providers directly
+* Call System providers directly
 * Contain business logic
 * Process legal analysis
 
@@ -194,7 +194,7 @@ All business logic MUST live in `/server`.
 * Upload documents
 * View results
 
-### AI Analysis
+### System Analysis
 
 * Summary
 * Score
@@ -319,7 +319,7 @@ Responsible for:
 
 * business logic
 * orchestration
-* AI processing
+* System processing
 
 ---
 
@@ -365,7 +365,7 @@ Stores:
 
 Stores:
 
-* AI analysis results
+* System analysis results
 
 ### alerts
 
@@ -391,7 +391,7 @@ Stores:
 4. OCR extracts text
 5. Text cleaned
 6. Chunk generation
-7. AI analysis
+7. System analysis
 8. Result stored
 
 ---
@@ -406,9 +406,9 @@ Large documents MUST:
 
 ---
 
-# 15. AI Responsibilities
+# 15. System Responsibilities
 
-The AI MUST:
+The System MUST:
 
 * identify lawsuit type
 * summarize the case
@@ -418,9 +418,9 @@ The AI MUST:
 
 ---
 
-# 16. AI Constraints
+# 16. System Constraints
 
-The AI MUST:
+The System MUST:
 
 * never invent legal facts
 * explicitly indicate missing information
@@ -429,7 +429,7 @@ The AI MUST:
 
 ---
 
-# 17. Mandatory AI Output
+# 17. Mandatory System Output
 
 Every analysis MUST include:
 
@@ -556,7 +556,7 @@ Deploy on:
 
 # 25. Migration Strategy
 
-The system MUST remain provider-agnostic.
+The System  MUST remain provider-agnostic.
 
 All integrations MUST use:
 
@@ -600,7 +600,7 @@ Forbidden:
 ## Phase 3
 
 * Automatic lawsuit tracking
-* AI legal writing assistant
+* System legal writing assistant
 * Multi-firm support
 
 ---

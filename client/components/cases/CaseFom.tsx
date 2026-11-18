@@ -72,7 +72,7 @@ export default function CaseForm({ onSubmit, onError }: CaseFormProps) {
                 }
               `}
             >
-              {label}
+              {t(label)}
             </button>
           ))}
         </div>

@@ -36,7 +36,7 @@ These APIs are stable, broadly implemented, and useful in everyday applications.
 
 ### Files & Persistence
 
-- **File System Access API** — Read/write local files with user permissions.
+- **File System  Access API** — Read/write local files with user permissions.
 - **File Handle & Directory Picker** extensions for batch file/directory selection.
 
 ### Concurrency & Scheduling

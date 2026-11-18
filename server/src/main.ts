@@ -7,16 +7,21 @@ import { json, raw } from 'express';
 import { AppModule } from './app.module';
 import { IncomingMessage, ServerResponse } from 'http';
 import * as dotenv from 'dotenv';
+import { GlobalErrorFilter } from './filter/global-error.filter';
 dotenv.config({ path: __dirname + '/../.env' });
 // console.log('hola')
 // console.log('SUPABASE_URL:', process.env.SUPABASE_URL);
 // console.log('SUPABASE_SERVICE_ROLE_KEY:', process.env.SUPABASE_SERVICE_ROLE_KEY);
 async function bootstrap(): Promise<void> {
-  console.log(process.env.JWT_SECRET)
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
     rawBody: false,
   });
   const config = app.get(ConfigService);
+  app.useGlobalFilters(new GlobalErrorFilter());
+
+  // Behind a proxy/CDN (Cloudflare, Vercel, load balancer): trust forwarding
+  // headers so req.ip and x-forwarded-for reflect the real client for geo-IP.
+  app.set('trust proxy', true);
 
   app.use('/api/payments/webhook', raw({ type: 'application/json', verify: captureRawBody }));
   app.use(json({ limit: '20mb' }));
@@ -36,7 +41,7 @@ async function bootstrap(): Promise<void> {
 
   app.setGlobalPrefix('api');
 
-  const port = config.get<number>('PORT') ?? 3001;
+  const port = config.get<number>('PORT') ?? 4000;
   await app.listen(port);
 }
 

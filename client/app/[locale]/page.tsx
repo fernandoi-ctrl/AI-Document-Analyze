@@ -1,12 +1,10 @@
-import LandingPage from '@/components/home'
-import { setRequestLocale } from 'next-intl/server'
+import { setRequestLocale } from 'next-intl/server';
+import ClientHomePage from './ClientHomePage';
+import { use } from 'react';
 
-export default async function HomePage({
-  params,
-}: {
-  params: Promise<{ locale: string }>
-}) {
-  const { locale } = await params
-  setRequestLocale(locale)
-  return <LandingPage />
+export default function HomePage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = use(params); // 👈 unwrap con use()
+  setRequestLocale(locale);
+
+  return <ClientHomePage locale={locale} />;
 }

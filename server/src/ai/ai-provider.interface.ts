@@ -1,3 +1,5 @@
+import { Jurisdiction } from '../geo/jurisdiction.types';
+
 export type CaseType = 'civil' | 'mercantil' | 'penal' | 'familiar' | 'laboral';
 export type RiskLevel = 'bajo' | 'medio' | 'alto';
 
@@ -27,6 +29,7 @@ export interface AIProvider {
     description: string,
     documentText: string,
     caseType: CaseType,
+    jurisdiction: Jurisdiction,
   ): Promise<AnalysisResult>;
 
   summarizeChunk(chunk: string, caseType: CaseType): Promise<string>;

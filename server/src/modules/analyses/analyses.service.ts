@@ -2,6 +2,7 @@ import { HttpException, HttpStatus, Inject, Injectable, Logger } from '@nestjs/c
 import { randomUUID } from 'crypto';
 import { AI_PROVIDER } from '../../ai/ai-provider.tokens';
 import { AIProvider } from '../../ai/ai-provider.interface';
+import { Jurisdiction } from '../../geo/jurisdiction.types';
 import { CasesService } from '../cases/cases.service';
 import { CaseInputDto } from '../cases/dto/case-input.dto';
 import { DocumentsService } from '../documents/documents.service';
@@ -15,6 +16,7 @@ export interface StartAnalysisInput {
   userId: string;
   caseInput: CaseInputDto;
   files: UploadedFile[];
+  jurisdiction: Jurisdiction;
 }
 
 @Injectable()
@@ -31,7 +33,7 @@ export class AnalysesService {
     @Inject(AI_PROVIDER) private readonly ai: AIProvider,
   ) {}
 
-  async start({ userId, caseInput, files }: StartAnalysisInput): Promise<{ jobId: string }> {
+  async start({ userId, caseInput, files, jurisdiction }: StartAnalysisInput): Promise<{ jobId: string }> {
     this.documents.validate(files);
     const validated = this.cases.validate(caseInput, files.length > 0);
 
@@ -44,7 +46,8 @@ export class AnalysesService {
 
     const jobId = randomUUID();
     this.jobs.create(jobId);
-    void this.run(jobId, validated.caseType, validated.description, files, userId);
+    this.logger.log(`Job ${jobId}: jurisdicción detectada ${jurisdiction.countryCode} (${jurisdiction.countryName}).`);
+    void this.run(jobId, validated.caseType, validated.description, files, userId, jurisdiction);
     return { jobId };
   }
 
@@ -66,6 +69,7 @@ export class AnalysesService {
     description: string,
     files: UploadedFile[],
     userId: string,
+    jurisdiction: Jurisdiction,
   ): Promise<void> {
     try {
       this.jobs.update(jobId, {
@@ -100,7 +104,7 @@ export class AnalysesService {
         message: 'Generando análisis legal con inteligencia artificial...',
       });
 
-      const result = await this.ai.analyzeCase(description, processed, caseType);
+      const result = await this.ai.analyzeCase(description, processed, caseType, jurisdiction);
       await this.repo.save({ userId, caseText: description, result });
 
       this.jobs.update(jobId, {

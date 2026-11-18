@@ -46,12 +46,29 @@ export function useAvailability(
   }
 }
 
+// function groupByDay(slots: AvailabilitySlot[]): Record<string, AvailabilitySlot[]> {
+//   const grouped: Record<string, AvailabilitySlot[]> = {}
+//   for (const slot of slots) {
+//     const day = slot.start.slice(0, 10)
+//     if (!grouped[day]) grouped[day] = []
+//     grouped[day].push(slot)
+//   }
+//   return grouped
+// }
 function groupByDay(slots: AvailabilitySlot[]): Record<string, AvailabilitySlot[]> {
   const grouped: Record<string, AvailabilitySlot[]> = {}
+
   for (const slot of slots) {
-    const day = slot.start.slice(0, 10)
-    if (!grouped[day]) grouped[day] = []
-    grouped[day].push(slot)
+    const startDate = new Date(slot.start)
+    const hour = startDate.getHours()
+
+    // Filtrar: solo entre 16:00 (4 pm) y 20:00 (8 pm)
+    if (hour >= 16 && hour < 20) {
+      const day = slot.start.slice(0, 10) // YYYY-MM-DD
+      if (!grouped[day]) grouped[day] = []
+      grouped[day].push(slot)
+    }
   }
+
   return grouped
 }

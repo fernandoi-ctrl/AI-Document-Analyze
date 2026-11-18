@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f8fafc;
+  --background: #e7eef6;
   --foreground: #0f172a;
 }
 
@@ -21,4 +21,108 @@ body {
 
 html {
   scroll-behavior: smooth;
+}
+/* .text-golden {
+  background: linear-gradient(90deg, #FFD700, #FFB700);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+} */
+/* .text-golden {
+  color: #DAA520; 
+} */
+
+
+.text-golden {
+  background: linear-gradient(90deg, #FFF8DC, #FFD700, #FFA500);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
+.text-premium-white {
+  color: #FFFFFF; /* Blanco puro */
+  text-shadow: 
+    0px 0px 4px rgba(255, 255, 255, 0.4), /* brillo blanco suave */
+    0px 0px 12px rgba(255, 215, 0, 0.6);  /* resplandor dorado */
+}
+/*arnulfo*/
+.experience-block {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 60px 40px;
+  background: #0a1a3a; /* 👈 fondo oscuro como tu página */
+  color: #fff;
+}
+
+.experience-text {
+  flex: 2;
+}
+
+.experience-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.experience-image img {
+  max-width: 80%; /* 👈 controla tamaño de la imagen */
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+.headline {
+  font-size: 34px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  /* color: #facc15; */
+  background: linear-gradient(90deg, #FFF8DC, #FFD700, #FFA500);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 
+    0px 0px 4px rgba(255, 255, 255, 0.4), /* brillo blanco suave */
+    0px 0px 12px rgba(255, 215, 0, 0.6);  /* resplandor dorado */
+}
+
+.subtext {
+  font-size: 18px;
+  line-height: 1.6;
+}
+/* .cta-button {
+  background: linear-gradient(90deg, #FFF8DC, #FFD700, #FFA500);
+  color: #0A1F44;
+  font-weight: 800;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4), 0 2px 6px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+  background: linear-gradient(90deg, #FFEFD5, #FFC107, #FF8C00);
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(255, 215, 0, 0.6), 0 3px 8px rgba(0, 0, 0, 0.4);
+}
+
+.cta-button:active {
+  background: linear-gradient(90deg, #FFD700, #FFA500, #FF4500);
+  transform: scale(0.98);
+} */
+.cta-button {
+  background: linear-gradient(90deg, #0A1F44, #1E3A8A, #2563EB); /* degradado azul elegante */
+  color: #FFFFFF; /* texto blanco nítido */
+  font-weight: 800;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4), 0 2px 6px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+  background: linear-gradient(90deg, #1E40AF, #2563EB, #3B82F6); /* azul más brillante */
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.6), 0 3px 8px rgba(0, 0, 0, 0.4);
+}
+
+.cta-button:active {
+  background: linear-gradient(90deg, #1E3A8A, #1D4ED8, #1E40AF); /* azul profundo al hacer clic */
+  transform: scale(0.98);
 }

@@ -6,7 +6,7 @@ export interface AnalysisSummary {
   probability: number | null
   riskLevel: string | null
 }
-export type CaseType = 'civil' | 'mercantil' | 'penal' | 'familiar' | 'laboral'
+export type CaseType = 'civil' | 'mercantil' | 'penal' | 'familiar' | 'laboral' | 'nose'
 export type RiskLevel = 'bajo' | 'medio' | 'alto'
 export type JobStatus = 'pending' | 'processing' | 'done' | 'error'
 
@@ -16,6 +16,7 @@ export const CASE_TYPE_LABELS: Record<CaseType, string> = {
   penal: 'Penal',
   familiar: 'Familiar',
   laboral: 'Laboral',
+  nose: 'Nose'
 }
 
 export interface AnalysisResult {

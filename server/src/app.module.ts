@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { DatabaseModule } from './database/database.module';
 import { AiModule } from './ai/ai.module';
+import { GeoModule } from './geo/geo.module';
 import { StorageModule } from './storage/storage.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { CasesModule } from './modules/cases/cases.module';
@@ -16,6 +17,7 @@ import { DatabaseService } from './database/database.service';
     ConfigModule.forRoot({ envFilePath: ['./server/.env'], isGlobal: true }),
     DatabaseModule,
     AiModule,
+    GeoModule,
     StorageModule,
     AuthModule,
     CasesModule,

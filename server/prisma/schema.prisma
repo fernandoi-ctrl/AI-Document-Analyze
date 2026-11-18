@@ -1,4 +1,4 @@
-// LexScan — Prisma schema (consultation scheduling module).
+// Analiza tu juicio — Prisma schema (consultation scheduling module).
 //
 // The runtime data layer in this repo is Supabase (see DatabaseService);
 // this schema documents the Postgres tables that the consultations module

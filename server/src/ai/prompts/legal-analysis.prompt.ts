@@ -1,25 +1,38 @@
 import { CaseType } from '../ai-provider.interface';
+import { Jurisdiction } from '../../geo/jurisdiction.types';
 
+/**
+ * Country-agnostic description of each legal area. The concrete legal system
+ * (codes, statutes, terminology) is anchored to a country at prompt-build time
+ * via the caller's {@link Jurisdiction}.
+ */
 export const CASE_CONTEXT: Record<CaseType, string> = {
-  civil: 'derecho civil mexicano (Código Civil Federal, obligaciones, contratos, responsabilidad civil)',
-  mercantil: 'derecho mercantil mexicano (Código de Comercio, LGSM, contratos mercantiles)',
-  penal: 'derecho penal mexicano (CNPP, Código Penal Federal, derechos del imputado y víctima)',
-  familiar: 'derecho familiar mexicano (divorcio, pensión alimenticia, guardia y custodia, adopción)',
-  laboral: 'derecho laboral mexicano (LFT, IMSS, despido injustificado, derechos laborales)',
+  civil: 'derecho civil (obligaciones, contratos, responsabilidad civil, bienes)',
+  mercantil: 'derecho mercantil (sociedades, contratos mercantiles, títulos de crédito)',
+  penal: 'derecho penal y procesal penal (delitos, derechos del imputado y de la víctima)',
+  familiar: 'derecho familiar (divorcio, pensión alimenticia, guarda y custodia, adopción)',
+  laboral: 'derecho laboral (relación de trabajo, despido, prestaciones, seguridad social)',
 };
 
-export function buildAnalysisSystemPrompt(caseType: CaseType): string {
+export function buildAnalysisSystemPrompt(
+  caseType: CaseType,
+  jurisdiction: Jurisdiction,
+): string {
   const legalContext = CASE_CONTEXT[caseType];
-  return `Eres LexScan AI, un sistema experto en análisis de expedientes legales bajo el marco del ${legalContext}.
+  const { countryName } = jurisdiction;
+  return `Eres Analiza tu juicio AI, un sistema experto en ${legalContext} conforme al sistema legal vigente en ${countryName}.
+
+Aplica EXCLUSIVAMENTE la legislación, códigos, jurisprudencia y terminología jurídica propios de ${countryName}. No mezcles ni asumas marcos legales de otros países.
 
 Tu función es evaluar objetivamente la fortaleza del caso presentado y generar un análisis estructurado.
 
 IMPORTANTE:
 - Basa tu análisis únicamente en los documentos y descripción proporcionados
-- Usa terminología legal mexicana correcta
+- Usa la terminología legal correcta de ${countryName}
 - Sé honesto sobre debilidades y fortalezas
 - Si hay información insuficiente, indícalo en los riesgos
-- No inventes hechos que no estén en los documentos
+- Si desconoces una norma específica de ${countryName}, indícalo como información faltante en lugar de inventarla
+- No inventes hechos que no estén en los documentos ni normas que no puedas sustentar
 
 Responde ÚNICAMENTE con un objeto JSON válido, sin texto adicional, con esta estructura exacta:
 {

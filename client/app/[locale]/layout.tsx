@@ -1,13 +1,13 @@
 import type { Metadata } from 'next'
 import { Geist } from 'next/font/google'
 import { NextIntlClientProvider, hasLocale } from 'next-intl'
+//@ts-ignore
 import '../globals.css'
 import {
   getMessages,
   getTranslations,
   setRequestLocale,
 } from 'next-intl/server'
-import { notFound } from 'next/navigation'
 import { routing } from '@/i18n/routing'
 import { AuthProvider } from '@/components/AuthProvider'
 import { StoreProvider } from '@/store/StoreProvider'
@@ -43,7 +43,6 @@ export default async function LocaleLayout({
   params: Promise<{ locale: string }>
 }) {
   const { locale } = await params
-  if (!hasLocale(routing.locales, locale)) notFound()
 
   setRequestLocale(locale)
   const messages = await getMessages()

@@ -1,11 +1,11 @@
 {
   "Metadata": {
-    "title": "LexScan — Analyze your case with AI",
+    "title": "Analiza tu juicio — Analyze your legal case online",
     "description": "Upload your legal file and receive a complete AI-powered analysis. Strengths, risks and recommendations for your case.",
     "keywords": "legal analysis,case file,lawyer,lawsuit,artificial intelligence,Mexico"
   },
   "Common": {
-    "appName": "LexScan",
+    "appName": "Analiza tu juicio",
     "loading": "Loading...",
     "loadingAnalysis": "Loading analysis...",
     "back": "Back",
@@ -37,26 +37,27 @@
     "registerSuccess": "Check your inbox to confirm your account. It may take a while."
   },
   "Home": {
-    "badge": "AI-powered legal analysis",
-    "headline": "Analyze your case with",
-    "headlineHighlight": "artificial intelligence",
+    "badge": "Legal Document Analysis",
+    "experienceHeadline":"",
+    "headline": "Analyze your case",
+    "headlineHighlight": "Online",
     "subhead": "Upload your file or describe your case. In minutes you'll receive a complete legal analysis: strengths, risks and recommendations.",
     "ctaAnalyze": "Analyze my case",
     "creditsHint": "Description only: free · With PDF: 1 credit · Results in minutes",
     "howItWorks": "How does it work?",
     "step1Title": "Describe your case",
     "step1Desc": "Write what happened or upload your legal documents (PDFs, photos).",
-    "step2Title": "AI analyzes everything",
-    "step2Desc": "Our system reviews the file and evaluates your legal situation.",
+    "step2Title": "We analyze your case",
+    "step2Desc": "Our System reviews the file and evaluates your legal situation.",
     "step3Title": "Receive your analysis",
     "step3Desc": "Get a clear report with strengths, risks and recommendations.",
     "caseTypesTitle": "Case types we analyze",
-    "caseTypesSub": "Specialized in the Mexican legal system",
+    "caseTypesSub": "Specialized in your local legal system",
     "ctaCardTitle": "Got questions about your case?",
     "ctaCardDesc": "Get an objective analysis in less than 3 minutes, no legal knowledge required.",
     "ctaCardButton": "Start analysis",
     "ctaCardFinePrint": "Description-only analysis: <b>free</b>. Uploading PDFs: <b>1 credit per analysis</b>.",
-    "footer": "LexScan — AI-assisted legal analysis. This service does not replace professional legal advice."
+    "footer": "Analiza tu juicio — AI-assisted legal analysis. This service does not replace professional legal advice."
   },
   "Analyze": {
     "breadcrumb": "Case analysis",
@@ -127,7 +128,7 @@
   "Processing": {
     "starting": "Starting analysis...",
     "title": "We're analyzing your file",
-    "subtitle": "The AI is reviewing your case in detail. This can take 1 to 3 minutes.",
+    "subtitle": "The System is reviewing your case in detail. This can take 1 to 3 minutes.",
     "percent": "{p}% complete",
     "wait": "Please wait...",
     "doNotClose": "Do not close this window while your case is being processed.",

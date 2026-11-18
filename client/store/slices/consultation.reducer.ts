@@ -68,7 +68,7 @@ export const getConsultations = createAsyncThunk<
   { rejectValue: string }
 >('consultation/fetch_entity_list', async (_, thunkAPI) => {
   try {
-    const { data } = await fetchConsultations()
+    const data = await fetchConsultations()
     return data
   } catch (err) {
     return thunkAPI.rejectWithValue(
@@ -83,7 +83,7 @@ export const getConsultation = createAsyncThunk<
   { rejectValue: string }
 >('consultation/fetch_entity', async (id, thunkAPI) => {
   try {
-    const { data } = await fetchConsultation(id)
+    const data = await fetchConsultation(id)
     return data
   } catch (err) {
     return thunkAPI.rejectWithValue(
@@ -98,7 +98,7 @@ export const createConsultation = createAsyncThunk<
   { rejectValue: string }
 >('consultation/create_entity', async (payload, thunkAPI) => {
   try {
-    const { data } = await createConsultationApi(payload)
+    const data = await createConsultationApi(payload)
     return data
   } catch (err) {
     return thunkAPI.rejectWithValue(
@@ -113,7 +113,7 @@ export const updateConsultation = createAsyncThunk<
   { rejectValue: string }
 >('consultation/update_entity', async ({ id, payload }, thunkAPI) => {
   try {
-    const { data } = await updateConsultationApi(id, payload)
+    const data = await updateConsultationApi(id, payload)
     return data
   } catch (err) {
     return thunkAPI.rejectWithValue(
@@ -143,7 +143,7 @@ export const getAvailability = createAsyncThunk<
   { rejectValue: string }
 >('consultation/fetch_availability', async ({ lawyerId, query }, thunkAPI) => {
   try {
-    const { data } = await fetchAvailability(lawyerId, query)
+    const data = await fetchAvailability(lawyerId, query)
     return data
   } catch (err) {
     return thunkAPI.rejectWithValue(
@@ -158,7 +158,7 @@ export const getLawyers = createAsyncThunk<
   { rejectValue: string }
 >('consultation/fetch_lawyers', async (_, thunkAPI) => {
   try {
-    const { data } = await fetchLawyers()
+    const data = await fetchLawyers()
     return data
   } catch (err) {
     return thunkAPI.rejectWithValue(
